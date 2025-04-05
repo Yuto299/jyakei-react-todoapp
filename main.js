@@ -1,6 +1,11 @@
+let todos = []; // todosの初期化、constだと書換えできないよ
+
 const onClickAdd = () => {
   const inputText = document.getElementById('add-text').value;
   document.getElementById('add-text').value = ''; // 入力欄を空にする
+
+  todos.push(inputText); // todosにinputTextを追加する
+  localStorage.setItem('todoList', JSON.stringify(todos)); // todosをlocalStorageに保存する
 
   createIncompleteTodo(inputText); // 未完了TODOを作成する関数を呼び出す、todoに渡すイメージで
 };
@@ -66,5 +71,14 @@ const createIncompleteTodo = (todo) => {
 //ここでbuttonタグにidを付与してから、追加の実装を行う
 document.getElementById('add-button').addEventListener('click', onClickAdd);
 
+window.addEventListener('load', () => {
+  const saveTodos = localStorage.getItem('todoList'); // localStorageから取得
+  if (saveTodos) {
+    todos = JSON.parse(saveTodos); // JSON形式の文字列をオブジェクトに変換
+    todos.forEach((todo) => {
+      createIncompleteTodo(todo); // 未完了TODOを作成する関数を呼び出す
+    });
+  }
+});
 //document.getElementById('add-button').addEventListener('click', onClickAdd);
 //上記の行が実行されなければ、他のイベントを使用することができない。よってonClickAddがすべてのスタート地点になる。
