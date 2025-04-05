@@ -18,19 +18,27 @@ const onClickAdd = () => {
   p.innerText = inputText; // 入力された値をpタグに設定
   console.log(p);
 
-  //buttonの要素を作成
+  //button（完了）の要素を作成
   const completeButton = document.createElement('button');
   completeButton.innerText = '完了'; // ボタンのテキストを設定
-  // console.log(completeButton);
-  completeButton.addEventListener('click', () => {
-    alert('完了ボタンが押されました！');
-  });
 
+  completeButton.addEventListener('click', () => {
+    const moveTarget = completeButton.closest('li'); // liを取得（moveTargetの中身は常に変化してる）
+    completeButton.nextElementSibling.remove(); // 削除ボタンを削除（完了のTODOには引き継がないから）
+    completeButton.remove(); // 完了ボタンを削除
+    const backButton = document.createElement('button'); // 戻すボタンを作成
+    backButton.innerText = '戻す'; // ボタンのテキストを設定
+    backButton.addEventListener('click', () => {}); // 戻すボタンを押したときの処理
+    moveTarget.firstElementChild.appendChild(backButton); // liの中に戻すボタンを追加
+    document.getElementById('complete-list').appendChild(moveTarget); // 完了リストに追加
+  }); //appendChildはコピーじゃない。移動になる。
+
+  //button（削除）の要素を作成
   const deleteButton = document.createElement('button');
   deleteButton.innerText = '削除'; // ボタンのテキストを設定
-  // console.log(deleteButton);
+
   deleteButton.addEventListener('click', () => {
-    const deleteTarget = deleteButton.closest('li'); //liを削除
+    const deleteTarget = deleteButton.closest('li'); // liを取得
     document.getElementById('incomplete-list').removeChild(deleteTarget); // liを削除
   });
 
