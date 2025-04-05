@@ -1,22 +1,26 @@
 const onClickAdd = () => {
   const inputText = document.getElementById('add-text').value;
   document.getElementById('add-text').value = ''; // 入力欄を空にする
-  // alert(inputText);
 
+  createIncompleteTodo(inputText); // 未完了TODOを作成する関数を呼び出す、todoに渡すイメージで
+};
+
+//渡された引数を基に未完了のTODOを作成する関数
+const createIncompleteTodo = (todo) => {
   //liの要素を作成
   const li = document.createElement('li');
-  console.log(li);
+  // console.log(li);
 
   //divの要素を作成
   const div = document.createElement('div');
   div.className = 'list-row'; // classを付与
-  console.log(div);
+  // console.log(div);
 
   //pの要素を作成
   const p = document.createElement('p');
   p.className = 'todo-item'; // classを付与
-  p.innerText = inputText; // 入力された値をpタグに設定
-  console.log(p);
+  p.innerText = todo; // 入力された値をpタグに設定
+  // console.log(p);
 
   //button（完了）の要素を作成
   const completeButton = document.createElement('button');
@@ -26,9 +30,16 @@ const onClickAdd = () => {
     const moveTarget = completeButton.closest('li'); // liを取得（moveTargetの中身は常に変化してる）
     completeButton.nextElementSibling.remove(); // 削除ボタンを削除（完了のTODOには引き継がないから）
     completeButton.remove(); // 完了ボタンを削除
+
     const backButton = document.createElement('button'); // 戻すボタンを作成
     backButton.innerText = '戻す'; // ボタンのテキストを設定
-    backButton.addEventListener('click', () => {}); // 戻すボタンを押したときの処理
+
+    backButton.addEventListener('click', () => {
+      const todoText = backButton.previousElementSibling.innerText; // pの中身を取得
+      createIncompleteTodo(todoText); // 未完了TODOを作成する関数を呼び出す
+      backButton.closest('li').remove(); // liを削除（戻すボタンを押したときに、liを削除する）
+    }); // 戻すボタンを押したときの処理
+
     moveTarget.firstElementChild.appendChild(backButton); // liの中に戻すボタンを追加
     document.getElementById('complete-list').appendChild(moveTarget); // 完了リストに追加
   }); //appendChildはコピーじゃない。移動になる。
