@@ -29,8 +29,9 @@ const onClickAdd = () => {
   const deleteButton = document.createElement('button');
   deleteButton.innerText = '削除'; // ボタンのテキストを設定
   // console.log(deleteButton);
-  completeButton.addEventListener('click', () => {
-    alert('削除ボタンが押されました！');
+  deleteButton.addEventListener('click', () => {
+    const deleteTarget = deleteButton.closest('li'); //liを削除
+    document.getElementById('incomplete-list').removeChild(deleteTarget); // liを削除
   });
 
   //階層構造を作成
@@ -45,3 +46,6 @@ const onClickAdd = () => {
 
 //ここでbuttonタグにidを付与してから、追加の実装を行う
 document.getElementById('add-button').addEventListener('click', onClickAdd);
+
+//document.getElementById('add-button').addEventListener('click', onClickAdd);
+//上記の行が実行されなければ、他のイベントを使用することができない。よってonClickAddがすべてのスタート地点になる。
