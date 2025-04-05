@@ -1,0 +1,63 @@
+body {
+  color: #666;
+}
+
+input {
+  border-radius: 8px;
+  border: none;
+  padding: 6px 10px;
+}
+
+button {
+  border-radius: 8px;
+  border: none;
+  padding: 5px 15px;
+  margin: 0px 2px;
+}
+
+button:hover {
+  background-color: rgba(8, 78, 108, 0.39);
+  cursor: pointer;
+}
+
+.input-area {
+  background-color: rgb(138, 229, 200);
+  width: 400px;
+  padding: 8px;
+  margin: 8px;
+  border-radius: 8px;
+}
+
+.not-done-area {
+  border: 2px solid rgb(122, 137, 131);
+  width: 400px;
+  padding: 8px;
+  margin: 8px;
+  min-height: 200px; /*最低限の高さ*/
+  border-radius: 8px;
+}
+
+.done-area {
+  border: 2px solid rgb(122, 137, 131);
+  width: 400px;
+  padding: 8px;
+  margin: 8px;
+  min-height: 200px; /*最低限の高さ*/
+  border-radius: 8px;
+  background-color: rgb(175, 235, 216);
+}
+
+.title {
+  text-align: center;
+  margin-top: 0;
+  font-weight: bold;
+}
+
+.list-row {
+  display: flex;
+  align-items: center;
+}
+
+.todo-item {
+  margin: 6px;
+}
